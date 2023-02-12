@@ -3,12 +3,15 @@ Create your own private registry and access is via UI
 <h2> Step 1 </h2><br>
 <h3> Install Docker and Docker Compose </h3>
 <br>
+You can use this link if your sever is ubntu 20.04 as mine is: <br>
+<link>https://support.netfoundry.io/hc/en-us/articles/360057865692-Installing-Docker-and-docker-compose-for-Ubuntu-20-04</link>
 <br>
 <h2> Step 2 </h2><br>
 <h3> Create "registry:2 container </h3>
 <br>
 <code>  mkdir docker_registry</code><br>
 <code>  cd docker_registry</code><br>
+Create and edit "docker-compose.yml" file <br>
 <code>  nano docker-compose.yml</code><br>
 <br>
 <code>cat << EOF > docker-compose.yml
@@ -36,8 +39,27 @@ services:
         depends_on:
         - docker-registry
 EOF</code><br>
+Build and run the containers using below command: <br>
 <code>  docker-compose up -d</code>
 <h2> Step 3</h2><br>
 <h3> Test registry </h3>
 <br>
+Pull an image you wan to push: (do this step on your registry server) <br>
+<code>  docker pull ubuntu:latest</code><br>
+<code>  docker tag ubuntu:latest 127.0.0.1:5000/ubuntu:latest</code><br>
+<code>  docker push 127.0.0.1:5000/ubuntu:latest</code><br>
+<br>
+<h2> Step 4</h2><br>
+<h3> Test registry from another server (gitlab runner in my case) </h3><br>
+<br>
+<code>  docker login Public/Private IP of Registry Server:5000</code><br>
+Enter the "username" and "Password" you provided in Step 2. <br>
+<code>  docker pull 127.0.0.1:5000/ubuntu:latest</code><br>
+Also you can set this configuration at "Gitlab CICD" yml file.<br>
+
+<b>P.S: If you face the error "http: server gave HTTP response to HTTPS client Error" when youwant to execute "Docker login" command plese do this:</b><br>
+<code>  vi /usr/lib/systemd/system/docker.service </code><br>
+<code>  ExecStart=/usr/bin/dockerd --insecure-registry Public/Private IP of Registry Server:5000</code><br>
+<code>  systemctl daemon-reload</code><br>
+<code>  service docker restart</code><br>
 
