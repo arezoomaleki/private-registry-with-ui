@@ -13,7 +13,8 @@ You can use this link if your sever is ubntu 20.04 as mine is: <br>
 <code>  cd docker_registry</code><br>
 Create and edit "docker-compose.yml" file <br>
 <code>  nano docker-compose.yml</code><br>
-<br>
+<br><br>
+<b>Please change the username and password before run the containers.</b><br>
 <code>cat << EOF > docker-compose.yml
 version: '3'
 services:
@@ -50,16 +51,18 @@ Pull an image you wan to push: (do this step on your registry server) <br>
 <code>  docker push 127.0.0.1:5000/ubuntu:latest</code><br>
 <br>
 <h2> Step 4</h2><br>
-<h3> Test registry from another server (gitlab runner in my case) </h3><br>
+<h3> Test registry from remote server (gitlab runner in my case) </h3><br>
 <br>
-<code>  docker login Public/Private IP of Registry Server:5000</code><br>
-Enter the "username" and "Password" you provided in Step 2. <br>
-<code>  docker pull 127.0.0.1:5000/ubuntu:latest</code><br>
-Also you can set this configuration at "Gitlab CICD" yml file.<br>
+<code>  docker login public-or-private-IP-of-Registry-Server:5000</code><br><br>
+Enter the "username" and "Password" you provided in Step 2. <br><br>
+<code>  docker pull 127.0.0.1:5000/ubuntu:latest</code><br><br>
+Also you can set this configuration at "Gitlab CICD" yml file.<br><br>
 
-<b>P.S: If you face the error "http: server gave HTTP response to HTTPS client Error" when youwant to execute "Docker login" command plese do this:</b><br>
+<b>P.S: If you face the error "http: server gave HTTP response to HTTPS client Error" when youwant to execute "Docker login" command plese do this on remote:</b><br>
 <code>  vi /usr/lib/systemd/system/docker.service </code><br>
-<code>  ExecStart=/usr/bin/dockerd --insecure-registry Public/Private IP of Registry Server:5000</code><br>
+<code>  ExecStart=/usr/bin/dockerd --insecure-registry public-or-private-IP-of-Registry-Server:5000</code><br>
 <code>  systemctl daemon-reload</code><br>
 <code>  service docker restart</code><br>
+<br>
+<b>You can login the registry UI using http://public-or-private-IP-of-Registry-Server:8086/</b>
 
