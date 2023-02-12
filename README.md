@@ -10,8 +10,8 @@ You can use this link if your sever is ubntu 20.04 as mine is: <br>
 <h3> Create "registry:2 container </h3>
 <br>
 <code>  mkdir docker_registry</code><br>
-<code>  cd docker_registry</code><br>
-Create and edit "docker-compose.yml" file <br>
+<code>  cd docker_registry</code><br><br>
+Create and edit "docker-compose.yml" file <br><br>
 <code>  nano docker-compose.yml</code><br>
 <br><br>
 <b>Please change the username and password before run the containers.</b><br>
@@ -39,7 +39,7 @@ services:
         restart: always
         depends_on:
         - docker-registry
-EOF</code><br>
+EOF</code><br><br>
 Build and run the containers using below command: <br>
 <code>  docker-compose up -d</code>
 <h2> Step 3</h2><br>
