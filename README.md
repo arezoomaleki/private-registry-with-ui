@@ -7,9 +7,9 @@ Create your own private registry and access is via UI
 <h2> Step 2 </h2><br>
 <h3> Create "registry:2 container </h3>
 <br>
-<code>mkdir docker_registry</code><br>
-<code>cd docker_registry</code><br>
-<code>nano docker-compose.yml</code><br>
+<code>  mkdir docker_registry</code><br>
+<code>  cd docker_registry</code><br>
+<code>  nano docker-compose.yml</code><br>
 <br>
 <code>cat << EOF > docker-compose.yml
 version: '3'
@@ -36,7 +36,7 @@ services:
         depends_on:
         - docker-registry
 EOF</code><br>
-<code>docker-compose up -d</code>
+<code>  docker-compose up -d</code>
 <h2> Step 3</h2><br>
 <h3> Test registry </h3>
 <br>
