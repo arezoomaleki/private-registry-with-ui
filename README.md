@@ -1,5 +1,5 @@
 # private-registry-with-ui
-Create your own private registry and access is via UI
+Create your own private registry and access it via UI
 <h2> Step 1 </h2><br>
 <h3> Install Docker and Docker Compose </h3>
 <br>
@@ -7,7 +7,7 @@ You can use this link if your sever is ubntu 20.04 as mine is: <br>
 <link>https://support.netfoundry.io/hc/en-us/articles/360057865692-Installing-Docker-and-docker-compose-for-Ubuntu-20-04</link>
 <br>
 <h2> Step 2 </h2><br>
-<h3> Create "registry:2 container </h3>
+<h3> Create Containers</h3>
 <br>
 <code>  mkdir docker_registry</code><br>
 <code>  cd docker_registry</code><br><br>
@@ -40,12 +40,12 @@ services:
         depends_on:
         - docker-registry
 EOF</code><br><br>
-Build and run the containers using below command: <br>
+Build and run the containers using below command: (if you don't use docker-compose plugin please change the command to "docker compose up -d") <br>
 <code>  docker-compose up -d</code>
 <h2> Step 3</h2><br>
 <h3> Test registry </h3>
 <br>
-Pull an image you wan to push: (do this step on your registry server) <br>
+Pull an image you want to push into your registry server: (do this step on your registry server) <br>
 <code>  docker pull ubuntu:latest</code><br>
 <code>  docker tag ubuntu:latest 127.0.0.1:5000/ubuntu:latest</code><br>
 <code>  docker push 127.0.0.1:5000/ubuntu:latest</code><br>
@@ -56,7 +56,7 @@ Pull an image you wan to push: (do this step on your registry server) <br>
 <code>  docker login public-or-private-IP-of-Registry-Server:5000</code><br><br>
 Enter the "username" and "Password" you provided in Step 2. <br><br>
 <code>  docker pull 127.0.0.1:5000/ubuntu:latest</code><br><br>
-Also you can set this configuration at "Gitlab CICD" yml file.<br><br>
+Also you can set this configuration in "Gitlab CICD" yml file.<br><br>
 
 <b>P.S: If you face the error "http: server gave HTTP response to HTTPS client Error" when youwant to execute "Docker login" command plese do this on remote:</b><br>
 <code>  vi /usr/lib/systemd/system/docker.service </code><br>
